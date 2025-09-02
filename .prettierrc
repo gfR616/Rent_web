@@ -1,0 +1,28 @@
+{
+	"trailingComma": "es5",
+	"tabWidth": 2,
+	"semi": true,
+	"singleQuote": true,
+	"printWidth": 80,
+	"bracketSpacing": true,
+	"arrowParens": "avoid",
+	"proseWrap": "preserve",
+	"htmlWhitespaceSensitivity": "strict",
+	"vueIndentScriptAndStyle": false,
+	"insertPragma": false,
+	"useTabs": true,
+	"quoteProps": "as-needed",
+	"importOrder": [
+		"^(.*).scss$",
+		"^components/(.*)$",
+		"^services/(.*)$",
+		"^styles/(.*)$",
+		"^[./]"
+	],
+	"importOrderSeparation": false,
+	"importOrderSortSpecifiers": true,
+	"endOfLine": "crlf",
+	"plugins": ["@trivago/prettier-plugin-sort-imports"],
+	"importOrderParserPlugins": ["typescript", "decorators-legacy"]
+}
+

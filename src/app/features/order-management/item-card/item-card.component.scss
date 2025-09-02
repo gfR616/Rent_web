@@ -1,0 +1,138 @@
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(48, 48, 48, 1);
+	width: 100%;
+	height: 78px;
+	border-radius: 10px;
+	margin-bottom: 12px;
+}
+
+.issue-card {
+	justify-content: space-between;
+}
+
+.buttons-wrapper {
+	display: grid;
+	grid-template-columns: 50% 2fr;
+	align-items: center;
+	width: 100%;
+}
+.content-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	position: absolute;
+	padding-left: 60px;
+	padding-right: 100px;
+	width: calc(100% - 160px);
+}
+
+.icon-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px;
+}
+
+.card-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	height: 70px;
+	width: 100%;
+	padding: 4px 0 5px 0;
+}
+
+.font-counts {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16.8px;
+	text-align: left;
+	text-underline-position: from-font;
+	text-decoration-skip-ink: none;
+}
+
+.items-balance {
+	color: #4ece69;
+	margin-top: 4px;
+	margin-bottom: 0;
+}
+
+.items-count {
+	color: #4ece69;
+	margin-right: 5px;
+}
+
+.item-text {
+	margin: 2px 0;
+	word-break: break-all;
+	overflow: hidden;
+}
+
+.counter-button {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 78px;
+	border-radius: 0px;
+	transition: all 0.3s ease;
+	&.disabled {
+		opacity: 0.5;
+	}
+}
+.button-with-count {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.minus {
+	border-radius: 10px 30px 30px 10px;
+	justify-content: flex-start;
+}
+
+.plus {
+	border-radius: 30px 10px 10px 30px;
+	justify-content: flex-end;
+}
+.issue-button {
+	color: #4ece69 !important;
+	width: 100%;
+	height: 56px;
+	border-radius: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 16px;
+	border-color: #4ece69;
+}
+
+.cancel-button {
+	color: #f95b1c !important;
+	width: 100%;
+	height: 56px;
+	border-radius: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 16px;
+	border-color: #f95b1c;
+}
+
+.issue-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: calc(100% - 35px);
+}
+
+.issue-date {
+	font-size: 13px;
+	padding: 0 0 0 0;
+	margin: 4px 0 4px 0;
+	padding-top: 6px;
+}

@@ -1,0 +1,126 @@
+.pin-pad-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.pin-circle-container {
+	margin-bottom: 36px;
+	display: flex;
+	justify-content: space-between;
+	width: 128px;
+	height: 14px;
+}
+
+.pin-circle {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.2);
+	transition: background-color 0.1s ease-in-out;
+}
+
+.pin-header {
+	margin-bottom: 15px;
+	color: white;
+	width: 114px;
+	height: 17px;
+	font-size: 14px;
+	line-height: 16.8px;
+}
+
+.pin-circle.active {
+	background-color: #5ae277;
+}
+
+.pin-circle.danger {
+	background-color: #e95525;
+}
+
+.pin-circle.complete {
+	background-color: #4dd0ff;
+}
+
+.pin-pad {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 228px !important;
+	height: 300px !important;
+}
+
+.pin-pad-row {
+	display: flex;
+	gap: 24px;
+	width: 228px !important;
+	height: 60px !important;
+}
+
+.pin-pad-button,
+.pin-pad-button-backspace {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	width: 60px;
+	height: 60px;
+	font-size: 28px;
+	font-weight: 600;
+	color: white;
+	border-radius: 50%;
+	line-height: 42px;
+}
+
+.empty-button {
+	width: 60px;
+	height: 60px;
+}
+
+.pin-pad-button:active {
+	background: linear-gradient(180deg, rgba(90, 226, 119, 0.1) 0%, #5ae277 100%);
+}
+
+.pin-pad-button-backspace:active {
+	background: linear-gradient(180deg, rgba(233, 85, 37, 0.1) 0%, #e95525 100%);
+}
+
+//анмация тряски
+.shake {
+	animation: shake 0.5s;
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+	10% {
+		transform: translateX(-5px);
+	}
+	20% {
+		transform: translateX(5px);
+	}
+	30% {
+		transform: translateX(-5px);
+	}
+	40% {
+		transform: translateX(5px);
+	}
+	50% {
+		transform: translateX(-5px);
+	}
+	60% {
+		transform: translateX(5px);
+	}
+	70% {
+		transform: translateX(-5px);
+	}
+	80% {
+		transform: translateX(5px);
+	}
+	90% {
+		transform: translateX(-5px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}

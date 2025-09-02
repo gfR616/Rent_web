@@ -1,0 +1,141 @@
+.container {
+	width: 100%;
+
+	mat-expansion-panel {
+		border-radius: 10px;
+		margin: 0;
+		box-shadow: none;
+		background-color: #303030;
+		--mat-expansion-header-expanded-state-height: max-content;
+	}
+
+	mat-expansion-panel-header {
+		height: 35px !important;
+		background-color: #303030;
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 14.4px;
+		padding: 0 15px 0 15px;
+	}
+
+	mat-panel-title {
+		margin: 0;
+		font-weight: 500;
+		color: #ffffff;
+	}
+
+	--mat-expansion-container-text-color: white;
+
+	.mat-expansion-panel:not(.mat-expanded)
+		.mat-expansion-panel-header:not([aria-disabled='true']):hover {
+		background-color: unset;
+	}
+}
+
+.inventory-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.info {
+	position: relative;
+	margin-bottom: 15px;
+	border-radius: 10px;
+	height: max-content;
+	background-color: #303030;
+}
+
+.list-item {
+	height: 35px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14.4px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: #ffffff;
+	padding: 0 15px 0 15px;
+}
+
+.rigths {
+	height: 22px;
+}
+
+.header {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ticket {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14.4px;
+	margin: 2px 0 2px 0;
+}
+
+.ticket-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.list-item-tickets {
+	width: 100%;
+	height: 35px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.tickets-wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 10px;
+}
+
+.title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.arrow-up {
+	transform: rotate(180deg);
+}
+
+.arrow-down {
+	transform: rotate(0deg);
+}
+.arrow-animation {
+	transition: all 0.3s ease-in-out;
+	position: relative;
+}
+
+.arrow-animation::before,
+.arrow-animation::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	animation: pulse 1s infinite;
+}
+
+.arrow-up::before,
+.arrow-up::after {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.arrow-down::before,
+.arrow-down::after {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}

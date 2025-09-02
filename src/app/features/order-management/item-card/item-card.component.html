@@ -1,0 +1,123 @@
+<div class="card" *ngIf="!!canGive && canShowDetail(canGive)">
+	<div class="content-wrapper">
+		<div class="card-info">
+			<p class="item-text">{{ canGive.item()?.text }}</p>
+			<p class="items-balance font-counts">{{
+				canGive.item()?.count || 0
+			}}</p></div
+		></div
+	>
+	<div class="buttons-wrapper">
+		<button
+			class="counter-button minus"
+			[class.disabled]="canGive.counter() <= 0"
+			[disabled]="canGive.counter() <= 0"
+			mat-button
+			(click)="onRemove(canGive)"
+			><div class="icon-container">
+				<mat-icon matSuffix svgIcon="minus"></mat-icon> </div
+		></button>
+		<button
+			class="counter-button plus"
+			mat-button
+			(click)="onAdd(canGive)"
+			[class.disabled]="canGive.item().count <= 0"
+			[disabled]="canGive.item().count <= 0"
+		>
+			<div class="button-with-count">
+				<p class="items-count font-counts">{{ canGive.counter() }}</p>
+				<div class="icon-container">
+					<mat-icon matSuffix svgIcon="plus"></mat-icon>
+				</div>
+			</div>
+		</button>
+	</div>
+</div>
+
+<div class="card" *ngIf="!!giving && !!giving.unique">
+	<div class="content-wrapper">
+		<div class="card-info">
+			<p class="item-text">{{ giving.item().text }}</p>
+		</div></div
+	>
+	<div class="buttons-wrapper">
+		<button class="counter-button minus" mat-button (click)="onRemove(giving)"
+			><div class="icon-container">
+				<mat-icon matSuffix svgIcon="minus"></mat-icon> </div
+		></button>
+	</div>
+</div>
+
+<div class="card" *ngIf="!!giving && !giving.unique">
+	<div class="content-wrapper">
+		<div class="card-info">
+			<p class="item-text">{{ giving.item().text }}</p>
+			<p class="items-balance font-counts">{{
+				giving.item().count || 0
+			}}</p></div
+		></div
+	>
+	<div class="buttons-wrapper">
+		<button
+			class="counter-button minus"
+			[class.disabled]="giving.counter() <= 0"
+			[disabled]="giving.counter() <= 0"
+			mat-button
+			(click)="onRemove(giving)"
+			><div class="icon-container">
+				<mat-icon matSuffix svgIcon="minus"></mat-icon> </div
+		></button>
+		<button
+			class="counter-button plus"
+			mat-button
+			(click)="onAdd(giving)"
+			[class.disabled]="giving.item().count <= 0"
+			[disabled]="giving.item().count <= 0"
+		>
+			<div class="button-with-count">
+				<p class="items-count font-counts">{{ giving.counter() }}</p>
+				<div class="icon-container">
+					<mat-icon matSuffix svgIcon="plus"></mat-icon>
+				</div>
+			</div>
+		</button>
+	</div>
+</div>
+
+<div class="card issue-card" *ngIf="!!canTake">
+	<div class="issue-wrapper">
+		<div class="card-info">
+			<p class="item-text">{{ canTake.serviceName }}</p>
+			<p class="issue-date">{{
+				canTake.giveoutTime | date: 'dd/MM/yyyy HH:mm:ss'
+			}}</p></div
+		>
+		<div class="issue-button-container">
+			<button
+				(click)="take.emit(canTake.id)"
+				class="issue-button"
+				mat-stroked-button
+				>Сдать</button
+			>
+		</div>
+	</div>
+</div>
+
+<div class="card issue-card" *ngIf="!!taking">
+	<div class="issue-wrapper">
+		<div class="card-info">
+			<p class="item-text">{{ taking.serviceName }}</p>
+			<p class="issue-date">{{
+				taking.giveoutTime | date: 'dd/MM/yyyy HH:mm:ss'
+			}}</p></div
+		>
+		<div class="issue-button-container">
+			<button
+				(click)="cancelTake.emit(taking.id)"
+				class="cancel-button"
+				mat-stroked-button
+				>Отмена</button
+			>
+		</div>
+	</div>
+</div>

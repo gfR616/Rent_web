@@ -1,0 +1,68 @@
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+	<div class="inputs-container">
+		<p class="inscription">{{ 'auth.login' | transloco }}</p>
+		<div class="input-container">
+			<mat-form-field appearance="outline">
+				<input
+					type="email"
+					formControlName="email"
+					matInput
+					[errorStateMatcher]="matcher"
+					placeholder="example@gmail.com"
+				/>
+				@if (
+					loginForm.get('email').hasError('email') &&
+					!loginForm.get('email').hasError('required')
+				) {
+					<mat-error class="error-message">{{
+						'auth.emailCorrectError' | transloco
+					}}</mat-error>
+				}
+				@if (loginForm.get('email').hasError('required')) {
+					<mat-error class="error-message">{{
+						'auth.emailRequiredError' | transloco
+					}}</mat-error>
+				}
+			</mat-form-field>
+		</div>
+		<p class="inscription">{{ 'auth.password' | transloco }}</p>
+		<div class="input-container">
+			<mat-form-field appearance="outline">
+				<input
+					matInput
+					[type]="hide() ? 'password' : 'text'"
+					formControlName="password"
+					#passwordInput
+				/>
+				<button
+					class="password-button"
+					matSuffix
+					type="button"
+					(click)="clickEvent($event)"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide()"
+				>
+					<img
+						class="password-icon"
+						[src]="hide() ? 'assets/icons/hide.svg' : 'assets/icons/show.svg'"
+					/>
+				</button>
+				@if (loginForm.get('password').hasError('required')) {
+					<mat-error class="error-message">{{
+						'auth.passwordRequiredError' | transloco
+					}}</mat-error>
+				}
+				@if (loginForm.get('password').hasError('maxlength')) {
+					<mat-error class="error-message">{{
+						'auth.passwordLengthError' | transloco
+					}}</mat-error>
+				}
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="button-container">
+		<button class="enter-button" mat-flat-button type="submit">{{
+			'auth.enter' | transloco
+		}}</button>
+	</div>
+</form>

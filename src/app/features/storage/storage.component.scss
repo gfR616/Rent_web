@@ -1,0 +1,165 @@
+.container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	top: 56px;
+	bottom: 73px;
+	width: 100%;
+}
+
+.storage-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.cards-container {
+	height: 100%;
+	overflow-y: auto;
+	position: relative;
+}
+
+.title-container {
+	position: fixed;
+	display: flex;
+	top: 0;
+	height: 56px;
+	width: 100%;
+	background-color: #252422;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 24px;
+	z-index: 9999;
+
+	.title {
+		margin-left: 16px;
+	}
+
+	.search-icon {
+		margin-right: 6px;
+	}
+}
+.info-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.info {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	margin: 10px 16px;
+}
+
+.categories {
+	margin: 10px 16px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.search-container {
+	position: relative;
+	margin: 10px 16px 10px;
+	height: auto;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	background-color: rgba(48, 48, 48, 1);
+	width: 100%;
+	height: 145px;
+	border-radius: 10px;
+	margin: 10px 16px;
+}
+
+.card-image-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	width: 113px !important;
+	height: 113px !important;
+	min-width: 113px !important;
+	min-height: 113px !important;
+	margin-top: 14px;
+	margin-bottom: 10px;
+	margin-right: 12px;
+	margin-left: 12px;
+	background-color: rgba(37, 36, 34, 1);
+}
+
+.card-image {
+	width: 113px;
+	height: 113px;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+}
+
+.card-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 113px;
+	width: 100%;
+	margin: 16px 12px 10px 0;
+}
+
+.card-text {
+	font-size: 18px;
+	margin-bottom: 10px;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 21.6px;
+	text-align: left;
+	margin-top: 16px;
+}
+
+.card-item-quantity-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	gap: 6px;
+}
+
+.card-item-quantity-rent,
+.card-item-quantity-balance {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 20px;
+	background-color: rgba(63, 63, 63, 1);
+	width: 58px;
+	height: 32px;
+	font: inherit;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19.2px;
+	text-align: left;
+	gap: 8px;
+	border: none;
+}
+.card-item-quantity-rent {
+	color: rgba(78, 206, 105, 1);
+}
+.card-item-quantity-balance {
+	color: rgba(249, 91, 28, 1);
+}

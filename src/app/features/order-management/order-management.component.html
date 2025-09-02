@@ -1,0 +1,318 @@
+<div class="container" *ngIf="!!stateStore.state() && !!orderState()">
+	<div class="order-management-wrapper">
+		<div class="card-info-container">
+			<rent-card-info></rent-card-info>
+		</div>
+
+		<div class="search-title">
+			<p>{{ 'order.selectIneventory' | transloco }}</p>
+		</div>
+		<div class="search-wrapper">
+			<rent-search
+				class="sticky-search"
+				(openModal)="openModal()"
+				[searchDataSource]="orderState()"
+				(dropSearch)="updateState()"
+				(searchResult)="onSearch($event)"
+				(inputValue)="onInputValueChange($event)"
+			></rent-search>
+		</div>
+
+		<div class="tabs-wrapper">
+			<mat-tab-group mat-stretch-tabs="true">
+				<mat-tab label="{{ 'order.all' | transloco }}">
+					<div class="tab-container">
+						<div class="trash-title">
+							<mat-checkbox
+								labelPosition="before"
+								(change)="giveAll.set(!$event.checked)"
+								[checked]="!giveAll()"
+							>
+								{{ 'order.availableOnly' | transloco }}:
+							</mat-checkbox>
+							<button mat-button (click)="dropOrder()">
+								<span class="trash-button">
+									<p>{{ 'order.clearOrder' | transloco }}</p>
+								</span>
+							</button>
+						</div>
+
+						<!-- Инвентарь -->
+						<div>
+							<div class="title" (click)="onExpandList(isExpandInventory)">
+								<p
+									>{{ 'order.inventory' | transloco }} ({{
+										allCountsCheck()
+									}})</p
+								>
+								<button
+									mat-icon-button
+									class="arrow-animation"
+									[disabled]="allCountsCheck() === 0"
+									[ngClass]="{
+										'arrow-up': isExpandInventory() && allCountsCheck() > 0,
+										'arrow-down':
+											!isExpandInventory() && allCountsCheck() === 0,
+									}"
+								>
+									<mat-icon>keyboard_arrow_down</mat-icon>
+								</button>
+							</div>
+							<mat-accordion>
+								<div class="expand-pannel">
+									<mat-expansion-panel
+										hideToggle
+										[disabled]="allCountsCheck() === 0"
+										[expanded]="isExpandInventory() && allCountsCheck() > 0"
+									>
+										<mat-expansion-panel-header></mat-expansion-panel-header>
+										<div class="item-cards-container">
+											<rent-item-card
+												*ngFor="let item of orderState().canGiveItems()"
+												[giveAll]="giveAll()"
+												[canGive]="item"
+												(add)="addToOrder($event)"
+												(remove)="
+													removeFromOrder(
+														$event.item().serviceId,
+														$event.item().storageItemId
+													)
+												"
+											></rent-item-card>
+										</div>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+
+						<!-- К выдаче -->
+						<div>
+							<div class="title" (click)="onExpandList(isExpandIssue)">
+								<p
+									>{{ 'order.issue' | transloco }} ({{
+										orderState().givingItems().length || 0
+									}})</p
+								>
+								<button
+									mat-icon-button
+									class="arrow-animation"
+									[disabled]="orderState().givingItems().length === 0"
+									[ngClass]="{
+										'arrow-up':
+											orderState().givingItems().length > 0 && isExpandIssue(),
+										'arrow-down':
+											orderState().givingItems().length === 0 ||
+											!isExpandIssue(),
+									}"
+								>
+									<mat-icon>keyboard_arrow_down</mat-icon>
+								</button>
+							</div>
+							<mat-accordion>
+								<div class="expand-pannel">
+									<mat-expansion-panel
+										hideToggle
+										[disabled]="orderState().givingItems().length === 0"
+										[expanded]="
+											isExpandIssue() && orderState().givingItems().length > 0
+										"
+									>
+										<mat-expansion-panel-header> </mat-expansion-panel-header>
+										<div class="item-cards-container">
+											<rent-item-card
+												*ngFor="let card of orderState().givingItems()"
+												[giving]="card"
+												(add)="addToOrder($event)"
+												(remove)="
+													removeFromOrder(
+														$event.item().serviceId,
+														$event.item().storageItemId
+													)
+												"
+											></rent-item-card>
+										</div>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+
+						<!-- На руках -->
+						<div>
+							<div class="title" (click)="onExpandList(isExpandInArm)">
+								<p
+									>{{ 'order.onBalance' | transloco }} ({{
+										orderState().canTakeItems().length || 0
+									}})</p
+								>
+								<button
+									mat-icon-button
+									class="arrow-animation"
+									[disabled]="orderState().canTakeItems().length === 0"
+									[ngClass]="{
+										'arrow-up':
+											isExpandInArm() && orderState().canTakeItems().length > 0,
+										'arrow-down':
+											!isExpandInArm() ||
+											orderState().canTakeItems().length === 0,
+									}"
+								>
+									<mat-icon>keyboard_arrow_down</mat-icon>
+								</button>
+							</div>
+							<mat-accordion>
+								<div class="expand-pannel">
+									<mat-expansion-panel
+										hideToggle
+										[disabled]="orderState().canTakeItems().length === 0"
+										[expanded]="
+											isExpandInArm() && orderState().canTakeItems().length > 0
+										"
+									>
+										<mat-expansion-panel-header> </mat-expansion-panel-header>
+										<div class="item-cards-container">
+											<rent-item-card
+												*ngFor="let card of orderState().canTakeItems()"
+												[canTake]="card"
+												(update)="updateState()"
+												(take)="onTake($event)"
+												(cancelTake)="onCancelTake($event)"
+											></rent-item-card>
+										</div>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+
+						<!-- К сдаче -->
+						<div>
+							<div class="title" (click)="onExpandList(isExpandTake)">
+								<p
+									>{{ 'order.take' | transloco }} ({{
+										orderState().takingItems().length || 0
+									}})</p
+								>
+								<button
+									mat-icon-button
+									[disabled]="orderState().takingItems().length === 0"
+									[ngClass]="{
+										'arrow-up':
+											isExpandTake() && orderState().takingItems().length > 0,
+										'arrow-down':
+											!isExpandTake() && orderState().takingItems().length > 0,
+									}"
+								>
+									<mat-icon>keyboard_arrow_down</mat-icon>
+								</button>
+							</div>
+							<mat-accordion>
+								<div class="expand-pannel" #scrollContainer>
+									<mat-expansion-panel
+										hideToggle
+										[disabled]="orderState().takingItems().length === 0"
+										[expanded]="
+											isExpandTake() && orderState().takingItems().length > 0
+										"
+									>
+										<mat-expansion-panel-header> </mat-expansion-panel-header>
+										<div class="item-cards-container">
+											<rent-item-card
+												*ngFor="let card of orderState().takingItems()"
+												[taking]="card"
+												(update)="updateState()"
+												(take)="onTake($event)"
+												(cancelTake)="onCancelTake($event)"
+											></rent-item-card>
+										</div>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+					</div>
+				</mat-tab>
+				<mat-tab
+					label="{{ 'order.onBalance' | transloco }} ({{
+						orderState().canTakeItems().length || 0
+					}})"
+				>
+					<div class="item-cards-container">
+						@if (orderState().canTakeItems().length > 0) {
+							<rent-item-card
+								*ngFor="let card of orderState().canTakeItems()"
+								[canTake]="card"
+								(update)="updateState()"
+								(take)="onTake($event)"
+								(cancelTake)="onCancelTake($event)"
+							></rent-item-card>
+						} @else {
+							<p>{{ 'order.emtyBalance' | transloco }}</p>
+						}
+					</div>
+				</mat-tab>
+				<mat-tab
+					label="{{ 'order.issue/take' | transloco }} ({{
+						orderState().givingItems().length || 0
+					}}/{{ orderState().takingItems().length || 0 }})"
+				>
+					<div>
+						<div class="title">
+							<p
+								>{{ 'order.issue' | transloco }} ({{
+									orderState().givingItems().length || 0
+								}})</p
+							>
+						</div>
+						@if (orderState().givingItems().length > 0) {
+							<div class="item-cards-container">
+								<rent-item-card
+									*ngFor="let card of orderState().givingItems()"
+									[giving]="card"
+									(add)="addToOrder($event)"
+									(remove)="
+										removeFromOrder(
+											$event.item().serviceId,
+											$event.item().storageItemId
+										)
+									"
+								></rent-item-card>
+							</div>
+						}
+					</div>
+
+					<div>
+						<div class="title">
+							<p
+								>{{ 'order.take' | transloco }} ({{
+									orderState().takingItems().length || 0
+								}})</p
+							>
+						</div>
+						@if (orderState().takingItems().length > 0) {
+							<div class="item-cards-container">
+								<rent-item-card
+									*ngFor="let card of orderState().takingItems()"
+									[taking]="card"
+									(update)="updateState()"
+									(take)="onTake($event)"
+									(cancelTake)="onCancelTake($event)"
+								></rent-item-card>
+							</div>
+						}
+					</div>
+				</mat-tab>
+			</mat-tab-group>
+		</div>
+
+		<rent-spinner *ngIf="stateStore.isLoading()"></rent-spinner>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="buttons-container">
+		<button class="issue-all-button" mat-stroked-button (click)="takeAll()">{{
+			'order.handOverAll' | transloco
+		}}</button>
+		<button class="done-button" mat-flat-button (click)="processOrder()">{{
+			'order.done' | transloco
+		}}</button>
+	</div>
+</div>

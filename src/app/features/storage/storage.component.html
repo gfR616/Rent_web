@@ -1,0 +1,74 @@
+<div class="container" *ngIf="!!storageData().organizationStorage">
+	<div class="storage-wrapper">
+		<div class="title-container" (click)="toggleSearchIsOpen()">
+			<span class="title">{{ 'storage.storage' | transloco }}</span>
+			<button class="search-icon" mat-icon-button>
+				<img src="assets/icons/loupe.svg" alt="search" />
+			</button>
+		</div>
+		<div class="search-container" *ngIf="searchIsOpen()">
+			<rent-search
+				[storage]="true"
+				[isFocused]="true"
+				[searchDataSource]="storageData().searchStorageData"
+				[searchStorageData]="storageData().searchStorageData"
+				(searchResult)="handleAddCategories($event)"
+			></rent-search>
+		</div>
+
+		<div class="cards-container" #scrollContainer>
+			<div class="categories">
+				<div
+					>{{ 'storage.categories' | transloco }}:
+					{{ storageData().organizationStorage.length }}</div
+				>
+				<button
+					style="margin-right: 5px"
+					matSuffix
+					mat-stroked-button
+					aria-label="Clear"
+					(click)="onClearSearch()"
+				>
+					{{ 'storage.dropFilter' | transloco }}
+				</button>
+			</div>
+
+			<div class="cards" *ngFor="let item of storageData().organizationStorage">
+				<div class="card">
+					<div class="card-image-container">
+						<div class="card-image">
+							<img src="assets/icons/emptyImg.svg" alt="Изображение товара" />
+						</div>
+					</div>
+
+					<div class="card-info">
+						<div class="card-text">
+							{{ item.storageItemName }}
+						</div>
+						<div class="card-item-quantity-wrapper">
+							<button class="card-item-quantity-rent" disabled>
+								<img src="assets/icons/red-point.svg" alt="" />
+								<p>{{ item.issuedQuantity }}</p>
+							</button>
+							<button class="card-item-quantity-balance" disabled>
+								<img src="assets/icons/green-point.svg" alt="" />
+								<p>{{ item.remainingQuantity }}</p>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div></div
+		>
+	</div>
+</div>
+<rent-spinner *ngIf="isLoading()"></rent-spinner>
+@if (!storageData().organizationStorage) {
+	<div class="container">
+		<div class="title-container">
+			<span class="title">{{ 'storage.storage' | transloco }}</span>
+		</div>
+		<div class="info-box">
+			<p class="info">Настройка складов не выполнена</p>
+		</div>
+	</div>
+}

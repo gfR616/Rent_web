@@ -1,0 +1,144 @@
+<div class="container" *transloco="let t">
+	<rent-nav-panel class="nav-panel"></rent-nav-panel>
+	<div class="settings-wrapper">
+		<div class="server-settings">
+			<p class="title">{{ t('settings.settings') }}</p>
+			<mat-accordion>
+				<form [formGroup]="form">
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>{{
+								t('settings.installation')
+							}}</mat-panel-title>
+						</mat-expansion-panel-header>
+						<mat-selection-list
+							[multiple]="false"
+							[formControl]="installationControl"
+						>
+							<mat-list-option
+								*ngFor="let item of settings()?.installations"
+								(click)="selectInstallation(item)"
+								[value]="item"
+								[selected]="item === settings()?.selectedInstallation || null"
+								class="list-item"
+							>
+								<span class="list-item">{{ item?.name }} </span>
+							</mat-list-option>
+						</mat-selection-list>
+					</mat-expansion-panel>
+
+					<mat-divider></mat-divider>
+
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>{{
+								t('settings.servicePoint')
+							}}</mat-panel-title>
+						</mat-expansion-panel-header>
+						@if (
+							settings()?.installations?.length !== 0 &&
+							!!settings()?.selectedInstallation
+						) {
+							<mat-selection-list
+								[multiple]="false"
+								[formControl]="servicePointControl"
+							>
+								<mat-list-option
+									*ngFor="let item of settings()?.servicePoints"
+									(click)="selectServicePoint(item)"
+									class="list-item"
+									[value]="item"
+									[selected]="item === settings()?.selectedServicePoint"
+									><span class="list-item">{{
+										item?.name
+									}}</span></mat-list-option
+								></mat-selection-list
+							>
+						} @else {
+							<div
+								style="
+									color: white;
+									padding-left: 15px;
+									display: flex;
+									align-items: center;
+									margin-top: 20px;
+									margin-bottom: 20px;
+								"
+							>
+								{{ t('settings.ifNotInstalltion') }}</div
+							>
+						}
+						<div
+							style="
+								color: white;
+								padding-left: 15px;
+								display: flex;
+								align-items: center;
+								margin-top: 20px;
+								margin-bottom: 20px;
+							"
+							*ngIf="
+								!!settings()?.selectedInstallation &&
+								settings()?.servicePoints?.length === 0
+							"
+							>{{ t('settings.ifNotRentServicePoints') }}</div
+						>
+					</mat-expansion-panel>
+
+					<mat-divider></mat-divider>
+
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>{{ t('settings.language') }}</mat-panel-title>
+						</mat-expansion-panel-header>
+
+						<mat-selection-list
+							[multiple]="false"
+							[formControl]="installationControl"
+						>
+							<mat-list-option
+								class="list-item"
+								*ngFor="let lang of langs"
+								[value]="lang.code"
+								[selected]="lang.code === selectedLang"
+								(click)="setLanguage(lang.code)"
+								><span class="list-item">{{ lang.name }}</span></mat-list-option
+							>
+						</mat-selection-list>
+
+						<div
+							style="
+								color: white;
+								padding-left: 15px;
+								display: flex;
+								align-items: center;
+								margin-top: 20px;
+								margin-bottom: 20px;
+							"
+							*ngIf="
+								!!settings()?.selectedInstallation &&
+								settings()?.servicePoints?.length === 0
+							"
+							>{{ t('settings.ifNotRentServicePoints') }}</div
+						>
+					</mat-expansion-panel>
+				</form>
+			</mat-accordion>
+		</div>
+	</div>
+	<div class="version-container">
+		<p class="version">
+			{{ 'settings.version' | transloco }}: {{ version() }}</p
+		>
+	</div>
+	<div class="save-button-container">
+		<button
+			[disabled]="!settings()?.basicSettings?.isSettingsSet"
+			class="save-button"
+			(click)="saveSettings()"
+			mat-flat-button
+			>{{ t('settings.continue') }}</button
+		></div
+	>
+	<rent-spinner *ngIf="isLoading()"></rent-spinner>
+</div>

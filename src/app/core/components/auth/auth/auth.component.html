@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="auth-wrapper">
+		<div class="logo-container">
+			<img src="assets/icons/logo.svg" class="logo" alt="Logo" />
+		</div>
+		@if (!!isSettingsSet()) {
+			<div class="switch-container">
+				<rent-switch
+					(switchChanged)="getSwitch($event)"
+					buttonOne="{{ 'auth.byPinCode' | transloco }}"
+					buttonTwo="{{ 'auth.byLogin' | transloco }}"
+				></rent-switch>
+			</div>
+			@if (switchValue() === 'pin') {
+				<rent-pin-pad></rent-pin-pad>
+			} @else if (switchValue() === 'login') {
+				<div class="inputs-container">
+					<rent-inputs-group></rent-inputs-group>
+				</div>
+			}
+		} @else {
+			<div class="title">{{ 'auth.enterLoginAndPassword' | transloco }}</div>
+			<div class="inputs-container">
+				<rent-inputs-group></rent-inputs-group>
+			</div>
+		}
+	</div>
+</div>

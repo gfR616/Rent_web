@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	height: 56px;
+	width: 100%;
+	background-color: #252422;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 24px;
+}
+
+.back-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 9px;
+	margin-bottom: 2px;
+}
+.back-icon {
+	width: 30px !important;
+	height: 30px !important;
+}
+.menu-icon {
+	width: 20px;
+	height: 20px;
+}
+.menu-button {
+	margin-left: auto;
+	margin-right: 8px;
+	margin-bottom: 2px;
+}
+.title {
+	margin-left: 6px;
+	margin-right: auto;
+	margin-bottom: 2px;
+}
+
+.logo-wrapper {
+	margin-left: 16px;
+	width: 100%;
+}
+.menu-item {
+	color: white;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.8px;
+	text-align: left;
+	padding-left: 30px;
+	background-color: #252422;
+	height: 57px;
+}
+mat-divider {
+	margin: 0px 28px !important;
+}
+
+.settings-button {
+	position: relative;
+	margin-right: 10px;
+}

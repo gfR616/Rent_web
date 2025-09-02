@@ -1,0 +1,269 @@
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@include mat.core();
+
+$default-theme: mat.define-theme(
+	(
+		color: (
+			theme-type: dark,
+			use-system-variables: true,
+		),
+		typography: (
+			use-system-variables: true,
+		),
+	)
+);
+
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+:root,
+:host {
+	@include mat.all-component-themes($default-theme);
+	--mat-sidenav-content-background-color: #252422;
+	--mat-app-background: #252422;
+	--sys-background: #252422; // бэкграунд
+	--sys-surface: #4ece69; // красит кнопки
+	--sys-on-surface: #4ece69; // текст внутри mat-tree
+	--sys-on-surface-variant: #cbc4cf;
+	--sys-inverse-surface: #0c471d; //тултип
+	--sys-inverse-on-surface: #ffffff; //шрифт тултипа
+	--sys-outline: #4d4a46; // контур инпута, кнопок и дивидера
+	--sys-shadow: #000000;
+	--sys-scrim: #000000;
+	--sys-primary: #4ece69; // кнопки flat
+	--sys-on-primary: #ffffff; // текст кнопок flat
+	--sys-primary-container: var(--sys-background); // маленькая кнопка с иконой
+	--sys-error: #f95b1c; // надпись ошибки
+	--mdc-outlined-text-field-input-text-color: white;
+	--mdc-text-button-label-text-color: #ffffff;
+	--mdc-checkbox-unselected-icon-color: rgba(78, 206, 105, 1);
+	--mdc-checkbox-selected-checkmark-color: rgba(78, 206, 105, 1);
+	--mdc-checkbox-selected-checkmark-color: white;
+	--mat-checkbox-label-text-color: #cbc4cf;
+	--mat-checkbox-label-text-size: 12px;
+	--mat-checkbox-label-text-line-height: 14.4px;
+	--mat-checkbox-label-text-weight: 400;
+	--mdc-dialog-container-shape: 0px;
+	--mdc-dialog-container-color: #252422;
+	--mat-dialog-container-small-max-width: 100%;
+	--mat-dialog-container-max-width: 100%;
+	--mat-switch-label-text-color: white;
+
+	--mdc-checkbox-selected-focus-state-layer-color: unset;
+	--mdc-checkbox-selected-hover-state-layer-color: unset;
+	--mdc-checkbox-selected-pressed-state-layer-color: unset;
+	--mdc-checkbox-unselected-focus-state-layer-color: unset;
+	--mdc-checkbox-unselected-hover-state-layer-color: unset;
+	--mdc-checkbox-unselected-pressed-state-layer-color: unset;
+
+	.mat-mdc-list-option
+		.mdc-checkbox__native-control:enabled:checked
+		~ .mdc-checkbox__background,
+	.mat-mdc-list-option
+		.mdc-checkbox__native-control:enabled:indeterminate
+		~ .mdc-checkbox__background
+		div.mat-expansion-panel-body {
+		color: #4ece69;
+		background-color: #343434;
+	}
+	mat-form-field input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 1000px #303030 inset !important;
+		-webkit-text-fill-color: #ffffff !important;
+		border: none;
+	}
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	-webkit-user-select: none; /* Для Chrome, Safari */
+	-moz-user-select: none; /* Для Firefox */
+	-ms-user-select: none; /* Для Internet Explorer/Edge */
+	user-select: none; /* Современные браузеры */
+	.mat-mdc-tab-header {
+		background: #252422;
+		position: sticky;
+		top: 54px;
+		z-index: 1000;
+	}
+}
+
+//переключалка
+mat-slide-toggle {
+	--mdc-switch-unselected-handle-color: #777777; //цвет не выбранной пурки без фокуса
+	--mdc-switch-selected-handle-color: #ffffff; //цвет не выбранной пурки без фокуса
+
+	--mat-switch-unselected-handle-size: 18px;
+	// --mat-switch-selected-handle-size: 18px;
+
+	--mdc-switch-unselected-track-color: unset;
+	--mdc-switch-selected-track-color: #4ece69;
+
+	--mdc-switch-selected-focus-handle-color: #ffffff;
+	--mdc-switch-selected-hover-handle-color: #ffffff;
+	--mdc-switch-selected-pressed-handle-color: #ffffff;
+	--mdc-switch-unselected-focus-handle-color: #777777;
+	--mdc-switch-unselected-hover-handle-color: #ffffff;
+	--mdc-switch-unselected-pressed-handle-color: #ffffff;
+}
+
+mat-sidenav-container {
+	height: 100%;
+}
+//inputs
+mat-form-field {
+	width: 100%;
+	height: 48px;
+	font-family: Raleway;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	border-radius: 10px;
+	background-color: #303030;
+
+	--mdc-outlined-text-field-container-shape: 10px !important;
+	--mat-form-field-container-height: 48px !important;
+	--mat-form-field-container-vertical-padding: 0px;
+	input: -webkit-autofill {
+		-webkit-box-shadow: 0 0 0 1000px #303030 inset !important;
+		-webkit-text-fill-color: #ffffff !important;
+		caret-color: #ffffff !important;
+	}
+	.mdc-text-field__input {
+		padding: auto;
+	}
+}
+
+.mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+	display: flex;
+}
+.mat-mdc-tab-label-container {
+	display: flex;
+	border-radius: 10px !important;
+	--mat-tab-header-divider-height: 0px;
+	--mat-tab-header-inactive-label-text-color: white;
+}
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
+	> .mat-mdc-tab-header
+	.mat-mdc-tab {
+	padding: 0;
+}
+.mat-mdc-tab-list {
+	border-radius: 10px !important;
+}
+
+.mat-typography {
+	font-family: 'Raleway', 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color: white;
+	letter-spacing: unset;
+	margin: unset;
+	font-variant-numeric: lining-nums;
+	font-feature-settings: 'lnum';
+	-moz-font-feature-settings: 'lnum=1';
+	-ms-font-feature-settings: 'lnum';
+	-webkit-font-feature-settings: 'lnum';
+	-o-font-feature-settings: 'lnum';
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+	.mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+	.mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused
+	.mdc-notched-outline__trailing {
+	border-color: #4ece69 !important;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--invalid
+	.mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--invalid
+	.mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--invalid
+	.mdc-notched-outline__trailing {
+	border-color: #f95b1c !important;
+}
+
+.mat-bottom-sheet-container {
+	min-width: initial !important;
+	max-width: initial !important;
+	width: 100vw !important;
+	--mat-bottom-sheet-container-text-font: Raleway;
+	--mat-bottom-sheet-container-text-color: white;
+	--mat-bottom-sheet-container-background-color: #303030;
+	--mat-bottom-sheet-container-text-size: 16px;
+	--mat-bottom-sheet-container-text-line-height: 19.2px;
+	--mat-bottom-sheet-container-text-weight: 600;
+	text-align: center;
+	border-radius: 35px 35px 0 0;
+}
+
+div.mat-mdc-menu-panel {
+	width: 261px;
+	border-radius: 10px 10px 10px 10px;
+	margin-top: 16px;
+	margin-right: -8px;
+	overflow: hidden;
+}
+div.mat-mdc-menu-content {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+button.mat-mdc-menu-item {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+div.mat-expansion-panel-body {
+	margin: 0px;
+	padding: 0px;
+	min-height: 60px;
+	max-height: calc(100vh - 450px);
+	overflow-y: auto;
+}
+
+@media (orientation: landscape) {
+	div.mat-expansion-panel-body {
+		max-height: calc(100vh - 200px) !important;
+	}
+}
+
+mat-divider {
+	height: 1px;
+	margin-left: 5% !important;
+	margin-right: 5% !important;
+	width: 90%;
+	--mat-divider-color: #3b3936;
+}
+span.mat-content.mat-content-hide-toggle {
+	margin-right: initial;
+}
+.mat-mdc-list-option .mdc-checkbox__background {
+	border-color: #7b2b22;
+}
+
+.mdc-checkbox__background {
+	width: 20px !important;
+	height: 20px !important;
+	border: 1px solid currentColor !important;
+	border-radius: 4px !important;
+}
+.mdc-list-item:hover .mdc-list-item__primary-text {
+	color: #ffffff;
+}
+.mat-mdc-button {
+	font-variant-numeric: lining-nums;
+	font-feature-settings: 'lnum';
+	-moz-font-feature-settings: 'lnum=1';
+	-ms-font-feature-settings: 'lnum';
+	-webkit-font-feature-settings: 'lnum';
+	-o-font-feature-settings: 'lnum';
+}

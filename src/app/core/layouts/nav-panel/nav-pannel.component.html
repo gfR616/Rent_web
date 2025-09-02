@@ -1,0 +1,40 @@
+<div class="container" *ngIf="!!isView() && !isModal">
+	@if (!logo()) {
+		<button mat-icon-button class="back-button" (click)="goBack()">
+			<img class="back-icon" src="assets/icons/back-arrow.svg" alt="back" />
+		</button>
+		<span class="title">{{ title() | transloco }}</span>
+		@if (!!settingsButton()) {
+			<button class="menu-button" mat-icon-button [matMenuTriggerFor]="menu">
+				<img
+					class="menu-icon"
+					src="assets/icons/nav-pannel-menu.svg"
+					alt="menu"
+				/>
+			</button>
+			<mat-menu #menu="matMenu" xPosition="before">
+				<button mat-menu-item class="menu-item" (click)="onDropSettings()">{{
+					'navPanel.clearSettings' | transloco
+				}}</button>
+			</mat-menu>
+		}
+	} @else if (!!logo()) {
+		<div class="logo-wrapper">
+			<img class="logo" src="assets/icons/nav-panel/nav-logo.svg" alt="logo" />
+		</div>
+		<button class="settings-button" mat-icon-button routerLink="/settings">
+			<img src="assets/icons/settings-button.svg" alt="settings" />
+		</button>
+	}
+</div>
+
+<div class="container" *ngIf="!!isModal">
+	<button
+		mat-icon-button
+		class="back-button"
+		(click)="closeModalEmmiter.emit()"
+	>
+		<img class="back-icon" src="assets/icons/back-arrow.svg" alt="back" />
+	</button>
+	<span class="title">{{ 'navPanel.back' | transloco }}</span>
+</div>

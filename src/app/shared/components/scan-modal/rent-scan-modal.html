@@ -1,0 +1,28 @@
+<rent-nav-panel
+	[isModal]="true"
+	(closeModalEmmiter)="dialog.closeAll()"
+></rent-nav-panel>
+<div class="container">
+	<div class="main-wrapper">
+		<div class="infos-container">
+			<span class="small-info">{{'scanModal.read' | transloco}} </span>
+		</div>
+		<rent-scanner
+			[torch]="torchEnabled()"
+			(scanResultEmitter)="data.onCodeResult($event)"
+		></rent-scanner>
+		<div class="aim-container">
+			<img class="aim-img" src="assets/pictures/main/aim.png" alt="aim" />
+			<p class="aim-text">{{'scanModal.codePlace' | transloco}}</p>
+		</div>
+		<span class="flash-container">
+			<button
+				mat-icon-button
+				class="flash-button"
+				(click)="torchEnabled.set(!this.torchEnabled())"
+			>
+				<img src="assets/icons/main/flash.svg" alt="фонарь" />
+			</button>
+		</span>
+	</div>
+</div>

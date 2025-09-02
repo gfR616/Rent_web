@@ -1,0 +1,30 @@
+<div class="container" *ngIf="!!isView()">
+	<div
+		class="btn-container"
+		[ngClass]="{
+			active: currentUrl() === '/main',
+		}"
+		(click)="navigateTo('/main')"
+	>
+		<div class="btn-wrapper">
+			<div class="img-container count-img"></div>
+			<span class="btn-label">{{ 'bottomNavbar.scan' | transloco }}</span>
+		</div>
+	</div>
+	<div
+		class="btn-container"
+		[ngClass]="{ active: currentUrl() === '/storage' }"
+		(click)="navigateTo('/storage')"
+	>
+		<div class="btn-wrapper">
+			<div class="img-container storage-img"></div>
+			<span class="btn-label">{{ 'bottomNavbar.storage' | transloco }}</span>
+		</div>
+	</div>
+	<div class="btn-container" (click)="logout()">
+		<div class="btn-wrapper">
+			<div class="img-container exit-img"></div>
+			<span class="btn-label">{{ 'bottomNavbar.exit' | transloco }}</span>
+		</div>
+	</div>
+</div>

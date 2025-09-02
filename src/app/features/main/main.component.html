@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="main-wrapper" *transloco="let t">
+		<div class="infos-container">
+			<span class="big-info">{{ t('main.descriptionOne') }}</span>
+			<span class="small-info"> {{ t('main.descriptionTwo') }} </span>
+		</div>
+		<div class="nfc-img-container">
+			<img class="img-box" src="assets/pictures/nfc.png" alt="карты" />
+		</div>
+		<button mat-flat-button class="open-modal-button" (click)="openModal()">
+			{{ t('main.scan') }}</button
+		>
+		<div
+			[ngStyle]="{
+				bottom: !!isChecked() ? '230px' : '160px',
+				position: 'fixed',
+				display: 'flex',
+				alignItems: 'center',
+				width: 'calc(100% - 32px)',
+			}"
+		>
+			<mat-slide-toggle
+				[hideIcon]="true"
+				[(ngModel)]="isChecked"
+				style="margin-right: 15px"
+			></mat-slide-toggle>
+			<span style="color: white">{{ t('main.inputPlaceholder') }}</span>
+		</div>
+
+		<div class="input-container" #search *ngIf="isChecked()">
+			<div class="input-wrapper">
+				<mat-form-field appearance="outline">
+					<input
+						type="text"
+						matInput
+						[placeholder]="'main.inputPlaceholder' | transloco"
+						[(ngModel)]="inputValue"
+						name="inputValue"
+						(keydown.enter)="onCodeResult(inputValue())"
+						(click)="focusOnInput(true)"
+						(focus)="focusOnInput(true)"
+						(blur)="focusOnInput(false)"
+					/>
+					<button
+						style="margin-right: 5px"
+						matSuffix
+						mat-icon-button
+						aria-label="Clear"
+						(click)="onCodeResult(inputValue()); $event.stopPropagation()"
+					>
+						<mat-icon svgIcon="enter"></mat-icon>
+					</button>
+				</mat-form-field>
+			</div>
+		</div>
+	</div>
+</div>
+
+<rent-spinner *ngIf="stateStore.isLoading()"></rent-spinner>

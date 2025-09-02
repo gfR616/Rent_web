@@ -1,0 +1,69 @@
+.switch-container {
+	width: 100%;
+}
+
+.switch {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 60px;
+	background-color: #303030;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.switch.disabled {
+	cursor: unset;
+	background-color: #3b3535a3;
+}
+
+.label {
+	height: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ffffff;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.label.disabled {
+	color: #888;
+	cursor: unset;
+}
+
+.label-left {
+	left: 0;
+	width: 50%;
+	text-align: left;
+}
+
+.label-right {
+	right: 0;
+	width: 50%;
+	text-align: right;
+}
+
+.trigger {
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	transform: translateY(-50%);
+	width: 50%;
+	height: 50px;
+	background-color: var(--sys-surface) !important;
+	border-radius: 8px;
+	transition: left 0.1s ease-in-out;
+}
+
+.active .trigger {
+	left: calc(50% - 5px);
+}
+
+.bold-text {
+	font-weight: 600;
+}

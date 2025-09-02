@@ -1,0 +1,163 @@
+<div class="container" *ngIf="!!stateStore.state()?.order">
+	<div class="title" (click)="onOpenCardInfo()">
+		<p>{{ 'order.clientCard' | transloco }}</p>
+		<button
+			mat-icon-button
+			class="arrow-animation"
+			[ngClass]="{
+				'arrow-up': isCardInfoOpened(),
+				'arrow-down': !isCardInfoOpened(),
+			}"
+		>
+			<mat-icon>keyboard_arrow_down</mat-icon>
+		</button>
+	</div>
+
+	<mat-accordion>
+		<div class="info">
+			<mat-expansion-panel hideToggle [expanded]="isCardInfoOpened()">
+				<mat-expansion-panel-header>
+					<mat-panel-title (click)="onOpenCardInfo()">
+						<div class="header">
+							<p>UID:</p>
+							<p>{{ stateStore.state().card?.card?.code }}</p>
+						</div>
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+
+				<form>
+					<div *ngIf="!!pledge()?.pledge?.cellNum">
+						<mat-divider></mat-divider>
+						<span class="list-item">
+							<p>{{ 'card.cellNum' | transloco }}:</p>
+							<p>{{ pledge()?.pledge?.cellNum }} </p>
+						</span>
+					</div>
+					<mat-divider></mat-divider>
+					<span class="list-item">
+						<p>{{ 'card.pledge' | transloco }}:</p>
+						<p
+							>{{ pledge()?.pledgeTypeName ?? ('card.noDeposit' | transloco) }}
+						</p>
+					</span>
+
+					<mat-divider></mat-divider>
+					<div>
+						<mat-accordion>
+							<mat-expansion-panel [disabled]="rigths()?.length < 2">
+								<mat-expansion-panel-header>
+									<mat-panel-title class="list-item-tickets">
+										<div class="tickets-wrapper">
+											<div class="ticket-list">
+												@if (rigths()?.length >= 2) {
+													<div class="ticket">{{
+														rigths()?.[0].name +
+															', ' +
+															rigths()?.[0].leftAmount +
+															' ' +
+															('card.unit' | transloco)
+													}}</div>
+													<div class="ticket">{{
+														rigths()?.[1].name +
+															', ' +
+															rigths()?.[1].leftAmount +
+															' ' +
+															('card.unit' | transloco)
+													}}</div>
+												} @else if (rigths()?.length === 1) {
+													<div class="ticket">{{
+														rigths()?.[0].name +
+															', ' +
+															rigths()?.[0].leftAmount +
+															' ' +
+															('card.unit' | transloco)
+													}}</div>
+												} @else {
+													<p>{{ 'card.noActiveAccounts' | transloco }}</p>
+												}
+											</div>
+											<div class="total-tickets" *ngIf="rigths()?.length > 0">
+												{{ 'card.all' | transloco }}:
+												{{ rigths()?.length }}
+											</div>
+										</div>
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<div *ngFor="let item of rigths(); let i = index">
+									<ng-container *ngIf="i > 1">
+										<div class="list-item rigths">
+											<p class="ticket"
+												>{{ item.name }}, {{ item.leftAmount
+												}}{{ ' ' + ('card.unit' | transloco) }}</p
+											>
+										</div>
+									</ng-container>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+					</div>
+					<mat-divider></mat-divider>
+					<div>
+						<mat-accordion>
+							<mat-expansion-panel [disabled]="tickets()?.length < 2">
+								<mat-expansion-panel-header>
+									<mat-panel-title class="list-item-tickets">
+										<div class="tickets-wrapper">
+											<div class="ticket-list">
+												@if (tickets()?.length >= 2) {
+													<div class="ticket">{{
+														tickets()?.[0].name +
+															', ' +
+															tickets()?.[0].leftAmount +
+															' ' +
+															('card.unit' | transloco)
+													}}</div>
+													<div class="ticket">{{
+														tickets()?.[1].name +
+															', ' +
+															tickets()?.[1].leftAmount +
+															' ' +
+															('card.unit' | transloco)
+													}}</div>
+												} @else if (tickets()?.length === 1) {
+													<div class="ticket">{{
+														tickets()?.[0].name +
+															', ' +
+															tickets()?.[0].leftAmount +
+															' ' +
+															('card.unit' | transloco)
+													}}</div>
+												} @else {
+													<p>{{ 'card.noActiveTickets' | transloco }}</p>
+												}
+											</div>
+											<div class="total-tickets" *ngIf="tickets()?.length > 0">
+												{{ 'card.all' | transloco }}: {{ tickets()?.length }}
+											</div>
+										</div>
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<div *ngFor="let item of tickets(); let i = index">
+									<ng-container *ngIf="i > 1">
+										<div class="list-item rigths">
+											<p class="ticket"
+												>{{ item.name }}, {{ item.leftAmount }}
+												{{ ' ' + ('card.unit' | transloco) }}
+												@if (!!item.to) {
+													{{ 'card.width' | transloco }}
+													{{ item.from | date: 'HH:mm' }}
+													{{ 'card.by' | transloco }}
+													{{ (item.to | date: 'HH:mm') ?? '' }}
+												}
+											</p>
+										</div>
+									</ng-container>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+					</div>
+				</form>
+			</mat-expansion-panel>
+		</div>
+	</mat-accordion>
+</div>

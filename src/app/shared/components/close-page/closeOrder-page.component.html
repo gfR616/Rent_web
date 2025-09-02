@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="auth-wrapper">
+		<div class="icon-container">
+			<img src="assets/icons/sucсess.svg" alt="" />
+		</div>
+		<div class="info-container">
+			<div class="info-summary success">
+				{{ 'closePage.closeOrder' | transloco }}
+			</div>
+			<div class="info-detail">
+				{{ 'closePage.next' | transloco }}
+			</div>
+		</div>
+		<div class="button-container">
+			<button class="next-button" mat-flat-button (click)="goNext()">{{
+				'closePage.continue' | transloco
+			}}</button>
+		</div>
+	</div>
+</div>

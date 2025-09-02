@@ -1,0 +1,153 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	top: 64px;
+	bottom: 122px;
+	width: 100%;
+	overflow-y: auto;
+
+	mat-expansion-panel {
+		border-radius: 10px;
+		margin: 0;
+		box-shadow: none;
+		width: 100%;
+		background-color: #303030;
+		.mdc-list {
+			padding: 0px;
+		}
+
+		--mat-expansion-header-expanded-state-height: max-content;
+	}
+
+	mat-expansion-panel-header {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-left: 16px;
+		padding-right: 16px;
+		height: 60px !important;
+		background-color: #303030;
+	}
+
+	mat-panel-title {
+		font-weight: 500;
+		color: #ffffff;
+	}
+
+	.mat-expansion-panel:not(.mat-expanded)
+		.mat-expansion-panel-header:not([aria-disabled='true']):hover {
+		background-color: unset;
+	}
+}
+.settings-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.server-settings {
+	position: relative;
+	margin-right: 16px;
+	margin-left: 16px;
+	margin-bottom: 15px;
+	border-radius: 10px;
+	height: max-content;
+	background-color: #303030;
+}
+
+.save-button-container {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 16px;
+	margin-top: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+	box-sizing: border-box;
+}
+
+.save-button {
+	position: relative;
+	width: 100%;
+	height: 56px !important;
+	border-radius: 10px;
+	font-weight: 600;
+	line-height: 17.5px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 19.2px;
+	text-align: left;
+	color: #4ece69;
+	margin-right: 16px;
+	margin-left: 16px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 63px;
+}
+
+.panel-title {
+	font-size: 22px;
+	font-weight: 800;
+	line-height: 16.8px;
+	text-align: left;
+	color: #ffffff;
+	margin-left: 16px;
+	margin-top: 20px;
+}
+
+.list-item {
+	--mdc-list-list-item-focus-label-text-color: white;
+	--mdc-list-list-item-label-text-color: white;
+	--mdc-list-list-item-hover-label-text-color: white;
+	font-weight: 500;
+	line-height: 16.8px;
+	--mdc-checkbox-unselected-icon-color: #4ece69; //чекбокс
+}
+
+.nav-panel {
+	display: flex;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	z-index: 100;
+}
+
+.info {
+	font-weight: 600;
+	line-height: 24px;
+	text-align: left;
+	color: #cbc4cf;
+	margin-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+	font-size: medium;
+	font-family: Raleway;
+}
+
+.version-container {
+	position: fixed;
+	font-weight: 600;
+	line-height: 24px;
+	color: #8c898d;
+	font-size: medium;
+	font-family: Raleway;
+	width: 100%;
+	bottom: 88px;
+	box-sizing: border-box;
+	margin: 0px;
+}
+
+.version {
+	margin: 10px 0 0 16px;
+}

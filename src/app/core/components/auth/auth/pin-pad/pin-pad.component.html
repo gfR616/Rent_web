@@ -1,0 +1,34 @@
+<div class="pin-pad-container">
+	<div class="pin-header">{{ 'auth.enterPin' | transloco }}</div>
+	<div class="pin-circle-container">
+		<span
+			*ngFor="let circle of circles(); let i = index"
+			class="pin-circle"
+			[ngClass]="{
+				active: i < position() && !hasError() && !isComplete(),
+				complete: isComplete(),
+				danger: hasError(),
+				shake: isShaking(),
+			}"
+		></span>
+	</div>
+	<div class="pin-pad">
+		<div *ngFor="let row of keypadRows(); let i = index" class="pin-pad-row">
+			<span
+				role="button"
+				*ngFor="let button of row; let j = index"
+				class="pin-pad-button"
+				(click)="enter(button)"
+			>
+				{{ button }}
+			</span>
+		</div>
+		<div class="pin-pad-row">
+			<div class="empty-button"></div>
+			<div (click)="enter('0')" class="pin-pad-button">0</div>
+			<div (click)="backSpace()" class="pin-pad-button-backspace">
+				<img src="assets/icons/backspace.svg" alt="" />
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,123 @@
+@if (data.severity === 'error') {
+	<div class="container">
+		<div class="icon-container">
+			<img src="assets/icons/error.svg" alt="" />
+		</div>
+		<div class="info-container">
+			<div class="info-summary danger"> {{ data.summary }} </div>
+			<div class="info-detail"> {{ data.detail }} </div>
+		</div>
+		<div class="ok-button-container">
+			<button class="ok-button" mat-flat-button (click)="closeBottomSheet()">{{
+				data.btnTxt
+			}}</button>
+		</div>
+	</div>
+} @else if (data.severity === 'success') {
+	<div class="container">
+		<div class="icon-container">
+			<img src="assets/icons/sucсess.svg" alt="" />
+		</div>
+		<div class="info-container">
+			<div class="info-summary success"> {{ data.summary }} </div>
+			<div class="info-detail"> {{ data.detail }} </div>
+		</div>
+		<div class="ok-button-container">
+			<button class="ok-button" mat-flat-button (click)="closeBottomSheet()">{{
+				data.btnTxt
+			}}</button>
+		</div>
+	</div>
+} @else if (data.severity === 'dropSettings') {
+	<div class="container">
+		<div class="info-container">
+			<div class="info-summary drop"> {{ data.summary }} </div>
+		</div>
+		<div class="ok-button-container">
+			<button
+				class="ok-button"
+				mat-flat-button
+				(click)="dropSettings($event)"
+				>{{ data.btnTxt }}</button
+			>
+			<button
+				class="ok-button"
+				style="background: #252422; margin-top: 10px"
+				mat-flat-button
+				(click)="closeBottomSheet()"
+				>{{ data.elseBtnTxt }}</button
+			>
+		</div>
+	</div>
+} @else if (data.severity === 'issue') {
+	<div class="container">
+		<div class="icon-container">
+			<img src="assets/icons/sucсess.svg" alt="" />
+		</div>
+		<ng-container *ngIf="giving()?.length === 0 && taking()?.length === 0"
+			><div class="info-container">
+				<div class="info-summary success"> {{ data.summary }} </div>
+				<div class="info-detail"> {{ data.detail }} </div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="giving()?.length > 0 || taking()?.length > 0">
+			@if (giving()?.length > 0 && (!taking() || taking()?.length === 0)) {
+				<div class="info-summary success">
+					{{ 'messages.issued' | transloco }}:
+				</div>
+				<div class="info-container" *ngFor="let item of giving()">
+					<div class="info-detail">
+						{{ item.name }} {{ item.count }} {{ 'card.unit' | transloco }}
+					</div>
+				</div>
+			}
+			@if (taking()?.length > 0 && (!giving() || giving()?.length === 0)) {
+				<div class="info-summary success">
+					{{ 'messages.taked' | transloco }}:
+				</div>
+				<div class="info-container" *ngFor="let item of taking()">
+					<div class="info-detail">
+						{{ item.name }} {{ item.count }} {{ 'card.unit' | transloco }}
+					</div>
+				</div>
+			}
+			@if (taking()?.length > 0 && giving()?.length > 0) {
+				<div class="info-summary success">
+					{{ 'messages.issued' | transloco }}:</div
+				>
+				<div class="info-container" *ngFor="let item of giving()">
+					<div class="info-detail">
+						{{ item.name }} {{ item.count }} {{ 'card.unit' | transloco }}
+					</div>
+				</div>
+				<div class="info-summary success">
+					{{ 'messages.taked' | transloco }}:
+				</div>
+				<div class="info-container" *ngFor="let item of taking()">
+					<div class="info-detail">
+						{{ item.name }} {{ item.count }} {{ 'card.unit' | transloco }}
+					</div>
+				</div>
+			}
+		</ng-container>
+		<div class="ok-button-container">
+			<button class="ok-button" mat-flat-button (click)="closeBottomSheet()">{{
+				data.btnTxt
+			}}</button>
+		</div>
+	</div>
+} @else if (data.severity === 'payment') {
+	<div class="container">
+		<div class="info-container">
+			<div class="info-summary success margin-top"> {{ data.summary }} </div>
+			<qr-code value="{{ data.detail }}" size="350" errorCorrectionLevel="M" />
+		</div>
+		<div class="info-detail"> К оплате: {{ data.refillAmount }}</div>
+		<div class="ok-button-container">
+			<button class="ok-button" mat-flat-button (click)="closeBottomSheet()">{{
+				data.btnTxt
+			}}</button>
+		</div>
+	</div>
+}

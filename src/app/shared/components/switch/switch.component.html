@@ -1,0 +1,19 @@
+<div class="switch-container">
+	<div class="switch" [ngClass]="{ active: isActive(), disabled: isDisabled }">
+		<span
+			class="label label-left"
+			[ngClass]="isActive() ? '' : 'bold-text'"
+			(click)="toggleSwitch(false)"
+			[class.disabled]="isDisabled"
+			>{{ buttonOne }}</span
+		>
+		<span
+			class="label label-right"
+			[ngClass]="isActive() ? 'bold-text' : ''"
+			(click)="toggleSwitch(true)"
+			[class.disabled]="isDisabled"
+			>{{ buttonTwo }}</span
+		>
+		<div class="trigger"></div>
+	</div>
+</div>
